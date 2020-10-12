@@ -15,7 +15,7 @@ body {
 
 .container {
 	width: 100%;
-	max-width: 1000px;
+	max-width: 1200px;
 	margin: 0 auto;
 	padding: 30px 30px;
 	text-align: center;
@@ -43,10 +43,30 @@ body {
 	display: none;
 }
 
+.search-results {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	grid-gap: 20px;
+	padding: 30px;
+}
+
+.result-item {
+	width: 250px;
+	height: 250px;
+	padding: 5px;
+}
+
+.photographer-name {
+	padding: 5px;
+	font-size: 1.2em;
+}
+
 .footer {
 	text-align: center;
 	font-size: 1.7em;
-	position:absolute;
-	bottom:0;
-	margin-bottom: 15px;
+	position: fixed;
+	background: white;
+	padding: 10px;
+	bottom: 0;
 	width:100%;
+}
