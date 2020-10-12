@@ -1,26 +1,59 @@
 const form = document.querySelector('.js-form');
 form.addEventListener('submit', handleSubmit);
+const nextBtn = document.querySelector('.js-next');
+const prevBtn = document.querySelector('.js-prev');
+let resultStats = document.querySelector('.js-result-stats');
+let totalResults;
+let currentPage = 1;
+let searchQuery;
 
 const apiKey = "euralEva9ogeSkcZJTx5DlEEn9zx_-BeiwZg_mUXVqY";
 
-async function handleSubmit(event) {
-	event.preventDefault();
-	const inputValue = document.querySelector('.js-search-input').value;
-	const searchQuery = inputValue.trim();
-	console.log(searchQuery);
+nextBtn.addEventListener('click', () => {
+	currentPage += 1;
+	fetchResults(searchQuery);
+});
 
+prevBtn.addEventListener('click', () => {
+	currentPage -= 1;
+	fetchResults(searchQuery);
+});
+
+function pagination(totalPages) {
+	nextBtn.classList.remove('hidden');
+	if (currentPage >= totalPages) {
+		nextBtn.classList.add('hidden');
+	}
+
+	prevBtn.classList.add('hidden');
+	if (currentPage !== 1) {
+		prevBtn.classList.remove('hidden');
+	}
+}
+
+async function fetchResults(searchQuery) {
 	try {
 		const results = await searchUnsplash(searchQuery);
+		pagination(results.total_pages);
 		console.log(results);
 		displayResults(results);
 	} catch(err) {
 		console.log(err);
 		alert('Failed to search Unsplash');
 	}
+} 
+
+function handleSubmit(event) {
+	event.preventDefault();
+	currentPage = 1;
+	const inputValue = document.querySelector('.js-search-input').value;
+	searchQuery = inputValue.trim();
+	console.log(searchQuery);
+	fetchResults(searchQuery);
 }
 
 async function searchUnsplash(searchQuery) {
-	const endpoint = `https://api.unsplash.com/search/photos?query=${searchQuery}&per_page=30&client_id=${apiKey}`;
+	const endpoint = `https://api.unsplash.com/search/photos?query=${searchQuery}&per_page=30&page=${currentPage}&client_id=${apiKey}`;
 	const response = await fetch(endpoint);
 	if (!response.ok) {
 		throw Error(response.statusText);
@@ -49,4 +82,6 @@ function displayResults(json) {
 			</div>`
 		);	
 	});
+	totalResults = json.total;
+	resultStats.textContent = `About ${totalResults} results found`;
 };

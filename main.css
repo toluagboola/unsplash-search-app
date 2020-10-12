@@ -10,7 +10,7 @@ html {
 }
 
 body {
-	font-family: sans-serif;
+	font-family: 'Lato', sans-serif;
 }
 
 .container {
@@ -29,36 +29,78 @@ body {
 .search-input {
 	width: 400px;
 	height: 30px;
+	padding: 5px;
+	border-radius: 4px;
+	outline: none;
 }
 
 .btn {
 	width: 60px;
 	height: 30px;
 	color: white;
-	background: red;
+	background: #ff0000;
 	border: none;
+}
+
+button {
+	cursor: pointer;
+	border-radius: 4px;
+	font-family: 'Lato', sans-serif;
+}
+
+button:hover {
+	background: #e60000;
+}
+
+button:focus {
+	outline: none;
 }
 
 .hidden {
 	display: none;
 }
 
+.result-stats {
+	color: gray;
+	padding-top: 15px;
+	font-size: 1.5em;
+}
+
 .search-results {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr;
 	grid-gap: 20px;
-	padding: 30px;
+	padding: 25px;
 }
 
 .result-item {
 	width: 250px;
 	height: 250px;
 	padding: 5px;
+	border-radius: 4px;
 }
 
 .photographer-name {
-	padding: 5px;
+	padding: 7px;
 	font-size: 1.2em;
+	letter-spacing: 0.7px;
+}
+
+.photographer-name:hover {
+	text-decoration: underline;
+}
+
+.prev-btn, .next-btn {
+	margin-bottom: 20px;
+	background: #ff0000;
+	width: 100px;
+	height: 30px;
+	color: white;
+	border: none;
+}
+
+.next-btn {
+	margin-left: 10px;
 }
 
 .footer {
@@ -69,4 +111,13 @@ body {
 	padding: 10px;
 	bottom: 0;
 	width:100%;
+}
+
+.github-link {
+	color: #ff0000;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
 }
