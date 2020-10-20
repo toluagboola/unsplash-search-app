@@ -3,6 +3,7 @@ form.addEventListener('submit', handleSubmit);
 const nextBtn = document.querySelector('.js-next');
 const prevBtn = document.querySelector('.js-prev');
 let resultStats = document.querySelector('.js-result-stats');
+const spinner = document.querySelector('.js-spinner');
 let totalResults;
 let currentPage = 1;
 let searchQuery;
@@ -32,6 +33,7 @@ function pagination(totalPages) {
 }
 
 async function fetchResults(searchQuery) {
+	spinner.classList.remove('hidden');
 	try {
 		const results = await searchUnsplash(searchQuery);
 		pagination(results.total_pages);
@@ -49,6 +51,7 @@ function handleSubmit(event) {
 	const inputValue = document.querySelector('.js-search-input').value;
 	searchQuery = inputValue.trim();
 	console.log(searchQuery);
+	spinner.classList.add('hidden');
 	fetchResults(searchQuery);
 }
 
